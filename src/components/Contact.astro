@@ -1,0 +1,31 @@
+---
+import '../styles/Contact.css';
+import { site } from '../data/site';
+---
+
+<section id="contact" class="section">
+  <div class="container">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-content">
+      <div class="contact-info">
+        <p>{site.email}</p>
+        <p>{site.phone}</p>
+        <p>{site.city}</p>
+      </div>
+      <!-- Formulaire géré par Netlify Forms -->
+      <form name="contact" method="POST" action="/merci" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+        <input type="hidden" name="form-name" value="contact" />
+        <p hidden><label>Ne pas remplir : <input name="bot-field" /></label></p>
+        <input type="text" name="name" placeholder="Votre nom" required />
+        <input type="email" name="email" placeholder="Votre email" required />
+        <input type="tel" name="phone" placeholder="Votre téléphone" />
+        <textarea name="message" placeholder="Votre message" required></textarea>
+        <label>
+          <input type="checkbox" name="rgpd" required />
+          J'accepte que mes coordonnées soient utilisées pour être recontacté·e.
+        </label>
+        <button type="submit" class="button">Envoyer</button>
+      </form>
+    </div>
+  </div>
+</section>
