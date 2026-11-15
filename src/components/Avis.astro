@@ -1,0 +1,54 @@
+---
+import '../styles/Avis.css';
+import { images } from '../data/images';
+import { avis } from '../data/avis';
+import { site } from '../data/site';
+import Photo from './ui/Photo.astro';
+import Ornement from './ui/Ornement.astro';
+---
+
+<section id="avis" class="section">
+  <div class="container avis-layout">
+    <div class="prestations">
+      <Photo src={images.prestations} alt="" width={800} class="prestations-bg" />
+      <div class="prestations-content">
+        <p>
+          Retrouvez l'ensemble des soins que je propose sur Planity.<br />
+          Vous pourrez également y réserver directement.
+        </p>
+        <h2 class="prestations-title">Mes prestations</h2>
+        <a
+          href={site.planityUrl || undefined}
+          class="button button--light"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-disabled={site.planityUrl ? undefined : 'true'}
+        >
+          Réserver sur Planity
+        </a>
+      </div>
+    </div>
+
+    <div class="avis">
+      <h2 class="avis-title">Ils m'ont fait confiance</h2>
+      <ul class="avis-list">
+        {
+          avis.map((a) => (
+            <li class="avis-card">
+              <blockquote>
+                <p class="avis-header">
+                  <strong>{a.nom}</strong> <span>• Client</span>
+                </p>
+                <p class="avis-texte">{a.texte}</p>
+              </blockquote>
+              <span class="avis-note" aria-label={`Note : ${a.note} sur 5`}>
+                ★ {a.note.toFixed(1)}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+  <Ornement position="bottom-right" />
+</section>

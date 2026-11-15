@@ -1,0 +1,141 @@
+/* Collages photo */
+.jeune-collages {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  margin-bottom: 6rem;
+}
+
+.jeune-collage {
+  aspect-ratio: 4 / 5;
+}
+
+.jeune-collage--center {
+  aspect-ratio: 3 / 4;
+}
+
+/* Zones réceptives */
+.zones-title {
+  margin: 0 0 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-text);
+}
+
+.zones-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 6rem;
+}
+
+.zone-photo {
+  position: relative;
+  aspect-ratio: 5 / 3;
+  margin: 0.5rem 0 1.5rem;
+}
+
+/* Cadre fin décalé, comme sur la maquette */
+.zone-photo::after {
+  content: '';
+  position: absolute;
+  top: -0.6rem;
+  bottom: -0.6rem;
+  left: 14%;
+  right: 14%;
+  border: 1px solid var(--color-text);
+  pointer-events: none;
+}
+
+.zone-nom {
+  margin: 0 0 0.75rem;
+}
+
+.zone-zone {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.3rem;
+}
+
+.zone-etat {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 1.15rem;
+}
+
+.zone p {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+/* Soin Régénérant */
+.regenerant-title {
+  text-align: center;
+  margin: 0 auto 2rem;
+  max-width: 760px;
+}
+
+.regenerant-content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.regenerant-photo {
+  aspect-ratio: 2 / 3;
+}
+
+.regenerant-text {
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.regenerant-text h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.3rem;
+  margin: 0 0 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .zones-grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 3rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .jeune-collages {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .jeune-collage,
+  .jeune-collage--center {
+    aspect-ratio: 4 / 3;
+  }
+
+  .zones-grid,
+  .regenerant-content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .regenerant-photo {
+    aspect-ratio: 4 / 5;
+    max-width: 360px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .regenerant-text {
+    font-size: 1.1rem;
+  }
+}

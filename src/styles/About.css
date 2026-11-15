@@ -1,1 +1,36 @@
-/* Styles de la section About */
+.about {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  align-items: stretch;
+}
+
+.about-text {
+  padding: 5rem 3.5rem;
+  max-width: 600px;
+  justify-self: end;
+}
+
+.about-text p {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+}
+
+.about-photo {
+  min-height: 500px;
+}
+
+@media (max-width: 800px) {
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+  .about-text {
+    padding: 4rem 1rem 3rem;
+    justify-self: stretch;
+  }
+
+  .about-photo {
+    min-height: 420px;
+  }
+}

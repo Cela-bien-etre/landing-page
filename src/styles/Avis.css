@@ -1,0 +1,125 @@
+.avis-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Bloc Planity */
+.prestations {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+  color: var(--color-white);
+  background: #b49a88;
+}
+
+.prestations-bg {
+  position: absolute;
+  inset: 0;
+}
+
+.prestations::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(70, 50, 40, 0.3);
+}
+
+.prestations-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.prestations-content p {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+.prestations-title {
+  font-size: 1.6rem;
+  margin: 1rem 0 1.25rem;
+}
+
+/* Avis */
+.avis {
+  padding: 2rem 2.5rem;
+  background: #fdfbef;
+}
+
+.avis-title {
+  color: var(--color-gold);
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 0 0 1.5rem;
+}
+
+.avis-title::before {
+  content: '– ';
+}
+
+.avis-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.avis-card {
+  position: relative;
+  padding: 1rem 1.25rem 1.5rem;
+  background: var(--color-white);
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+}
+
+.avis-card blockquote {
+  margin: 0;
+}
+
+.avis-header {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.avis-header span {
+  color: var(--color-text-light);
+  font-size: 0.75rem;
+}
+
+.avis-texte {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.avis-note {
+  position: absolute;
+  left: 3.5rem;
+  bottom: -1rem;
+  padding: 0.25rem 0.9rem;
+  border-radius: 999px;
+  background: #fdd35c;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+@media (max-width: 800px) {
+  .avis-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .prestations {
+    min-height: 380px;
+  }
+
+  .avis {
+    padding: 2rem 1rem 3rem;
+  }
+}

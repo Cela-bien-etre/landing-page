@@ -1,0 +1,56 @@
+.formules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  max-width: 780px;
+  margin-left: auto;
+}
+
+.formule-card {
+  position: relative;
+  aspect-ratio: 3 / 5;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.formule-card .photo {
+  position: absolute;
+  inset: 0;
+  transition: transform 0.6s ease;
+}
+
+.formule-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(60, 50, 40, 0.25);
+}
+
+.formule-card:hover .photo {
+  transform: scale(1.04);
+}
+
+.formule-label {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  color: var(--color-white);
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  text-align: center;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 700px) {
+  .formules-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .formule-card {
+    aspect-ratio: 16 / 9;
+  }
+}

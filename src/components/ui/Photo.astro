@@ -1,0 +1,46 @@
+---
+// Affiche une image (Cloudinary optimisée) ou, si le lien est vide,
+// un emplacement gris avec un libellé pour savoir quelle image mettre.
+import { cld } from '../../data/images';
+
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+}
+
+const { src, alt, width = 800, class: className = '', loading = 'lazy' } = Astro.props;
+---
+
+{
+  src ? (
+    <img src={cld(src, width)} alt={alt} loading={loading} decoding="async" class:list={['photo', className]} />
+  ) : (
+    <div class:list={['photo', 'photo--placeholder', className]} role="img" aria-label={alt}>
+      <span>{alt}</span>
+    </div>
+  )
+}
+
+<style>
+  .photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .photo--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    min-height: 200px;
+    background: var(--color-placeholder);
+    color: var(--color-text-light);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    text-align: center;
+  }
+</style>

@@ -1,11 +1,33 @@
 ---
 import '../styles/Hero.css';
+import { images, cld } from '../data/images';
+import { site } from '../data/site';
+
+const bg = images.hero ? `url(${cld(images.hero, 1920)})` : 'none';
 ---
 
-<section id="hero">
+<header id="hero" style={`--hero-bg: ${bg}`}>
+  <a href="/" class="hero-logo">
+    {
+      images.logo ? (
+        <img src={cld(images.logo, 400)} alt={site.name} loading="eager" />
+      ) : (
+        <span class="hero-logo-text">
+          Céla <small>Bien-être</small>
+        </span>
+      )
+    }
+  </a>
+
   <div class="hero-content">
-    <h1>Accroche principale</h1>
-    <p>Sous-titre</p>
-    <a href="#contact" class="button">Prendre rendez-vous</a>
+    {images.ornement && <img src={cld(images.ornement, 140)} alt="" aria-hidden="true" class="hero-ornement" />}
+    <h1>Massages à domicile</h1>
+    <p class="hero-soins">Personnalisé - Deep tissue - Sportif - Réflexologie plantaire - Kobido - Reiki</p>
+    <span class="hero-separator" aria-hidden="true"></span>
+    <blockquote>
+      <p>« La meilleure façon de se reconnecter à Soi est de toucher le corps avec l'intention de l'écouter avec le cœur. »</p>
+      <cite>{site.owner}</cite>
+    </blockquote>
+    <a href="#contact" class="button button--light">Let's connect</a>
   </div>
-</section>
+</header>

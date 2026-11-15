@@ -1,0 +1,44 @@
+.retraites {
+  display: grid;
+  grid-template-columns: 1fr 250px;
+  gap: 4rem;
+  align-items: center;
+}
+
+.retraites-text {
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+.retraites-note {
+  font-style: italic;
+}
+
+.retraites-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  text-underline-offset: 4px;
+}
+
+.retraites-link:hover {
+  color: var(--color-gold);
+}
+
+.retraites-photo {
+  aspect-ratio: 3 / 5;
+}
+
+@media (max-width: 800px) {
+  .retraites {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .retraites-text {
+    font-size: 1.1rem;
+  }
+
+  .retraites-photo {
+    aspect-ratio: 16 / 10;
+  }
+}

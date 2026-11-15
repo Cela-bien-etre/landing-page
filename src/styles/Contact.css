@@ -1,1 +1,119 @@
-/* Styles de la section Contact */
+.contact {
+  padding: 4rem 1rem 2.5rem;
+  color: var(--color-white);
+  background-color: #b5a597;
+  background-image: linear-gradient(rgba(120, 100, 85, 0.35), rgba(120, 100, 85, 0.35)), var(--contact-bg);
+  background-size: cover;
+  background-position: center;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.contact-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  font-size: 1.25rem;
+}
+
+.contact-title {
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  text-transform: uppercase;
+  margin: 0;
+  max-width: 320px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--color-text);
+}
+
+.contact-form label {
+  margin-bottom: 0.4rem;
+}
+
+.contact-form .optional {
+  font-size: 0.85em;
+  color: var(--color-text-light);
+}
+
+.contact-form input:not([type='checkbox']),
+.contact-form textarea {
+  width: 100%;
+  margin-bottom: 1.25rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #8c8a84;
+  border-radius: 6px;
+  background: transparent;
+  font: inherit;
+  font-size: 1rem;
+  color: inherit;
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+.contact-form .contact-rgpd {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+}
+
+.contact-rgpd input {
+  margin-top: 0.2rem;
+  accent-color: var(--color-gold);
+}
+
+.contact-form .button {
+  width: 100%;
+  border-radius: 8px;
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.contact-signature {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.contact-line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-gold-light);
+}
+
+@media (max-width: 800px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-intro {
+    font-size: 1.1rem;
+  }
+
+  .contact-form {
+    padding: 1.25rem;
+  }
+}

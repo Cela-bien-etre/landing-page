@@ -4,9 +4,21 @@ import { site } from '../data/site';
 ---
 
 <Layout title={`Merci — ${site.name}`}>
-  <main class="section container">
-    <h1>Merci pour votre message !</h1>
+  <main class="section container merci">
+    <h1 class="section-title">Merci pour votre message !</h1>
     <p>Je vous recontacte très vite.</p>
+    <p>{site.owner}</p>
     <a href="/" class="button">Retour à l'accueil</a>
   </main>
 </Layout>
+
+<style>
+  .merci {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+</style>
