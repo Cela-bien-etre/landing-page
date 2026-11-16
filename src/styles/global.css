@@ -10,6 +10,7 @@
   --color-white: #fff;
   --color-overlay: rgba(90, 66, 52, 0.35);
   --color-placeholder: #e2e0d4;
+  --color-error: #a63d2f;
 
   /* Polices (équivalents web des polices Canva) */
   --font-heading: 'Gilda Display', Georgia, serif;   /* ≈ TY Serif (titres) */

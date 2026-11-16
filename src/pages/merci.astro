@@ -1,9 +1,11 @@
 ---
+// Page de secours : Netlify y redirige après un envoi que le script n'a pas intercepté
+// (JavaScript désactivé ou pas encore chargé). Sans elle, le visiteur verrait une 404.
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
 ---
 
-<Layout title={`Merci — ${site.name}`}>
+<Layout title={`Merci — ${site.name}`} noindex>
   <main class="section container merci">
     <h1 class="section-title">Merci pour votre message !</h1>
     <p>Je vous recontacte très vite.</p>

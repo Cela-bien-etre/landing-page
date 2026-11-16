@@ -4,6 +4,20 @@ import { images, cld } from '../data/images';
 import { site } from '../data/site';
 
 const bg = images.contact ? `url(${cld(images.contact, 1920)})` : 'none';
+
+// Messages affichés par le script du formulaire
+const errors = {
+  name: 'Merci d’indiquer votre nom.',
+  email: 'Merci d’indiquer une adresse email valide.',
+  phone: 'Ce numéro de téléphone ne semble pas valide.',
+  message: 'Merci d’écrire votre message.',
+  consent: 'Merci d’accepter d’être recontacté·e pour envoyer votre demande.',
+  invalid: 'Certains champs sont à corriger.',
+};
+const statusLabels = {
+  sending: 'Envoi en cours…',
+  error: 'Oups, le message n’a pas pu être envoyé. Réessayez ou contactez-moi directement.',
+};
 ---
 
 <section id="contact" class="contact" style={`--contact-bg: ${bg}`}>
@@ -13,30 +27,77 @@ const bg = images.contact ? `url(${cld(images.contact, 1920)})` : 'none';
       <p>Une idée cadeau ou un projet de séjour ? Remplissez ce formulaire et je vous recontacterai pour échanger et trouver ce qui vous correspond le mieux !</p>
     </div>
 
-    <!-- Formulaire géré par Netlify Forms -->
-    <form name="contact" method="POST" action="/merci" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
-      <input type="hidden" name="form-name" value="contact" />
-      <p hidden><label>Ne pas remplir : <input name="bot-field" /></label></p>
+    <div class="contact-card">
+      <!--
+        Formulaire Netlify Forms.
+        - Avec JavaScript : envoi en arrière-plan (fetch) et message de confirmation sur place.
+        - Sans JavaScript : envoi classique, Netlify redirige vers /merci.
+      -->
+      <form
+        class="contact-form"
+        name="contact"
+        method="POST"
+        action="/merci"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <p hidden><label>Ne pas remplir : <input name="bot-field" /></label></p>
 
-      <label for="contact-name">Nom</label>
-      <input id="contact-name" type="text" name="name" autocomplete="name" required />
+        <div class="form-group">
+          <label for="contact-name">Nom <span class="required">*</span></label>
+          <input id="contact-name" type="text" name="name" autocomplete="name" maxlength="80" required aria-describedby="name-error" />
+          <p class="field-error" id="name-error" hidden></p>
+        </div>
 
-      <label for="contact-email">Email</label>
-      <input id="contact-email" type="email" name="email" autocomplete="email" required />
+        <div class="form-group">
+          <label for="contact-email">Email <span class="required">*</span></label>
+          <input id="contact-email" type="email" name="email" autocomplete="email" maxlength="120" required aria-describedby="email-error" />
+          <p class="field-error" id="email-error" hidden></p>
+        </div>
 
-      <label for="contact-phone">Téléphone <span class="optional">(facultatif)</span></label>
-      <input id="contact-phone" type="tel" name="phone" autocomplete="tel" />
+        <div class="form-group">
+          <label for="contact-phone">Téléphone <span class="optional">(facultatif)</span></label>
+          <input
+            id="contact-phone"
+            type="tel"
+            name="phone"
+            inputmode="tel"
+            autocomplete="tel"
+            maxlength="25"
+            pattern="[0-9\s\+\(\)\.\-]{6,25}"
+            aria-describedby="phone-error"
+          />
+          <p class="field-error" id="phone-error" hidden></p>
+        </div>
 
-      <label for="contact-message">Message</label>
-      <textarea id="contact-message" name="message" rows="4" required></textarea>
+        <div class="form-group">
+          <label for="contact-message">Message <span class="required">*</span></label>
+          <textarea id="contact-message" name="message" rows="4" maxlength="2000" required aria-describedby="message-error"></textarea>
+          <p class="field-error" id="message-error" hidden></p>
+        </div>
 
-      <label class="contact-rgpd">
-        <input type="checkbox" name="rgpd" required />
-        J'accepte que mes coordonnées soient utilisées pour être recontacté·e.
-      </label>
+        <div class="form-group">
+          <label class="contact-rgpd">
+            <input type="checkbox" name="rgpd" value="oui" required aria-describedby="rgpd-error" />
+            <span>J'accepte que mes coordonnées soient utilisées pour être recontacté·e. <span class="required">*</span></span>
+          </label>
+          <p class="field-error" id="rgpd-error" hidden></p>
+        </div>
 
-      <button type="submit" class="button">Envoyer</button>
-    </form>
+        <button type="submit" class="button submit-button">
+          <span class="submit-label">Envoyer</span>
+          <span class="submit-spinner" aria-hidden="true"></span>
+        </button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="form-success" role="alert" tabindex="-1" hidden>
+        <span class="form-success-icon" aria-hidden="true">✓</span>
+        <h3>Merci pour votre message !</h3>
+        <p>Je vous recontacte très vite. {site.owner}</p>
+      </div>
+    </div>
   </div>
 
   <div class="container contact-signature">
@@ -44,3 +105,95 @@ const bg = images.contact ? `url(${cld(images.contact, 1920)})` : 'none';
     <span>{site.domain}</span>
   </div>
 </section>
+
+<script is:inline define:vars={{ errors, statusLabels }}>
+  const form = document.querySelector('.contact-form');
+  const success = document.querySelector('.form-success');
+
+  if (form && success) {
+    // JS disponible : on remplace la validation native par des messages en français sous chaque champ.
+    form.setAttribute('novalidate', '');
+
+    const statusEl = form.querySelector('.form-status');
+    const button = form.querySelector('.submit-button');
+    let submitted = false;
+
+    const errorMessage = (field) => {
+      if (field.name === 'rgpd') return errors.consent;
+      if (field.type === 'email') return errors.email;
+      if (field.type === 'tel') return errors.phone;
+      if (field.name === 'message') return errors.message;
+      if (field.name === 'name') return errors.name;
+      return errors.invalid;
+    };
+
+    const setFieldState = (field) => {
+      const id = field.getAttribute('aria-describedby');
+      const errorEl = id ? document.getElementById(id) : null;
+      if (field.checkValidity()) {
+        field.removeAttribute('aria-invalid');
+        if (errorEl) errorEl.hidden = true;
+        return true;
+      }
+      field.setAttribute('aria-invalid', 'true');
+      if (errorEl) {
+        errorEl.textContent = errorMessage(field);
+        errorEl.hidden = false;
+      }
+      return false;
+    };
+
+    const setStatus = (text, kind) => {
+      statusEl.textContent = text || '';
+      statusEl.dataset.kind = kind || '';
+    };
+
+    const fields = [...form.querySelectorAll('input[aria-describedby], textarea')];
+
+    // Après une première tentative d'envoi, on revalide chaque champ quand il change.
+    fields.forEach((field) => {
+      const revalidate = () => {
+        if (submitted) setFieldState(field);
+      };
+      field.addEventListener('blur', revalidate);
+      field.addEventListener('change', revalidate);
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      submitted = true;
+
+      let firstInvalid = null;
+      fields.forEach((field) => {
+        if (!setFieldState(field) && !firstInvalid) firstInvalid = field;
+      });
+      if (firstInvalid) {
+        setStatus(errors.invalid, 'error');
+        firstInvalid.focus();
+        return;
+      }
+
+      button.disabled = true;
+      button.classList.add('is-loading');
+      setStatus(statusLabels.sending, 'sending');
+
+      try {
+        const body = new URLSearchParams(new FormData(form)).toString();
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body,
+        });
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        form.hidden = true;
+        success.hidden = false;
+        success.focus();
+      } catch (err) {
+        setStatus(statusLabels.error, 'error');
+      } finally {
+        button.disabled = false;
+        button.classList.remove('is-loading');
+      }
+    });
+  }
+</script>
