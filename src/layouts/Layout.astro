@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { site } from '../data/site';
+import { ogImage } from '../data/images';
 
 interface Props {
   title?: string;
@@ -9,27 +10,54 @@ interface Props {
 }
 
 const { title = site.title, description = site.description, noindex = false } = Astro.props;
+
+// URL canonique : l'adresse officielle de la page, sur le domaine défini dans astro.config.mjs
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang="fr-FR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href={`data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🌿</text></svg>`} />
-    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#f8f8f0" />
+    <link rel="icon" type="image/svg+xml" href={`data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🌿</text></svg>`} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Partage sur les réseaux sociaux (Facebook, WhatsApp, LinkedIn…) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <title>{title}</title>
+    <meta property="og:url" content={canonical} />
+    {
+      ogImage && (
+        <>
+          <meta property="og:image" content={ogImage} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content={`${site.owner}, ${site.name}`} />
+        </>
+      )
+    }
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://res.cloudinary.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,400&family=Gilda+Display&family=Playfair+Display:ital,wght@0,700;1,400&family=Public+Sans:wght@400;600&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Balises propres à une page (préchargements, données structurées…) -->
+    <slot name="head" />
   </head>
   <body>
     <slot />

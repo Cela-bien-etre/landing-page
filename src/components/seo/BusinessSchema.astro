@@ -1,0 +1,47 @@
+---
+// Données structurées schema.org (JSON-LD) : décrivent l'activité à Google
+// (nom, prestations, tarifs, zone d'intervention…) pour les résultats enrichis et la recherche locale.
+// Les avis clients ne sont volontairement pas balisés : Google n'affiche pas d'étoiles
+// pour les avis qu'une entreprise publie sur son propre site.
+import { site } from '../../data/site';
+import { soins } from '../../data/soins';
+import { images, ogImage } from '../../data/images';
+
+const url = new URL('/', Astro.site).href;
+const prix = (p: string) => p.replace(/[^\d.,]/g, '').replace(',', '.');
+const tousLesPrix = soins.flatMap((s) => s.tarifs.map((t) => Number(prix(t.prix))));
+const sameAs = [site.instagram, site.planityUrl].filter(Boolean);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'HealthAndBeautyBusiness',
+  '@id': `${url}#business`,
+  name: site.name,
+  description: site.description,
+  url,
+  ...(ogImage && { image: ogImage }),
+  ...(images.logo && { logo: images.logo }),
+  ...(site.phone && { telephone: site.phone }),
+  ...(site.email && { email: site.email }),
+  ...(site.areaServed.length && { areaServed: site.areaServed }),
+  ...(sameAs.length && { sameAs }),
+  priceRange: `${Math.min(...tousLesPrix)}€ - ${Math.max(...tousLesPrix)}€`,
+  currenciesAccepted: 'EUR',
+  founder: { '@type': 'Person', name: site.owner },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Soins à domicile',
+    itemListElement: soins.flatMap((soin) =>
+      soin.tarifs.map((t) => ({
+        '@type': 'Offer',
+        name: `${soin.nom} (${t.duree})`,
+        price: prix(t.prix),
+        priceCurrency: 'EUR',
+        itemOffered: { '@type': 'Service', name: soin.nom, description: soin.description },
+      })),
+    ),
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

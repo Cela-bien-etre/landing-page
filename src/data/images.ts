@@ -64,12 +64,45 @@ export const images = {
 /**
  * Ajoute les optimisations Cloudinary (format auto, qualité auto, largeur max)
  * à une URL Cloudinary. Les autres URL sont renvoyées telles quelles.
+ * Avec une hauteur, l'image est recadrée sur le sujet (c_fill, g_auto).
  */
-export function cld(url: string, width?: number): string {
+export function cld(
+  url: string,
+  width?: number,
+  options: { height?: number; format?: string } = {},
+): string {
   if (!url.includes("res.cloudinary.com") || !url.includes("/upload/"))
     return url;
-  const transforms = ["f_auto", "q_auto", width ? `w_${width}` : null]
+  const { height, format = "auto" } = options;
+  const transforms = [
+    `f_${format}`,
+    "q_auto",
+    width ? `w_${width}` : null,
+    height ? `h_${height},c_fill,g_auto` : null,
+  ]
     .filter(Boolean)
     .join(",");
   return url.replace("/upload/", `/upload/${transforms}/`);
 }
+
+/**
+ * Photo du hero en deux versions : paysage pour desktop, recadrage vertical
+ * centré sur le visage (g_auto) pour mobile. Partagées par Hero.astro et le préchargement.
+ */
+export const heroImages = images.hero
+  ? {
+      desktop: cld(images.hero, 1920),
+      mobile: cld(images.hero, 900, { height: 1600 }),
+    }
+  : null;
+
+/** Point de bascule desktop / mobile du hero (doit rester aligné avec Hero.css). */
+export const HERO_MOBILE_MAX = 800;
+
+/**
+ * Image de partage (Facebook, WhatsApp, LinkedIn…) : 1200×630 en JPG,
+ * car certains réseaux ne lisent pas le WebP/AVIF servi par f_auto.
+ */
+export const ogImage = images.hero
+  ? cld(images.hero, 1200, { height: 630, format: "jpg" })
+  : "";

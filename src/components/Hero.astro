@@ -1,12 +1,14 @@
 ---
 import '../styles/Hero.css';
-import { images, cld } from '../data/images';
+import { images, cld, heroImages } from '../data/images';
 import { site } from '../data/site';
 
-const bg = images.hero ? `url(${cld(images.hero, 1920)})` : 'none';
+const heroStyle = heroImages
+  ? `--hero-bg: url(${heroImages.desktop}); --hero-bg-mobile: url(${heroImages.mobile})`
+  : '--hero-bg: none; --hero-bg-mobile: none';
 ---
 
-<header id="hero" style={`--hero-bg: ${bg}`}>
+<header id="hero" style={heroStyle}>
   <a href="/" class="hero-logo">
     {
       images.logo ? (

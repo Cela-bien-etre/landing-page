@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import BusinessSchema from '../components/seo/BusinessSchema.astro';
 import Hero from '../components/Hero.astro';
 import About from '../components/About.astro';
 import ToucherConscient from '../components/ToucherConscient.astro';
@@ -10,9 +11,24 @@ import Retraites from '../components/Retraites.astro';
 import Avis from '../components/Avis.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import { heroImages, HERO_MOBILE_MAX } from '../data/images';
 ---
 
 <Layout>
+  <Fragment slot="head">
+    {
+      /* La photo du hero est l'élément principal affiché au chargement (LCP) :
+         on la précharge, en ne téléchargeant que la version adaptée à l'écran. */
+      heroImages && (
+        <>
+          <link rel="preload" as="image" href={heroImages.mobile} media={`(max-width: ${HERO_MOBILE_MAX}px)`} fetchpriority="high" />
+          <link rel="preload" as="image" href={heroImages.desktop} media={`(min-width: ${HERO_MOBILE_MAX + 1}px)`} fetchpriority="high" />
+        </>
+      )
+    }
+    <BusinessSchema />
+  </Fragment>
+
   <Hero />
   <main>
     <About />

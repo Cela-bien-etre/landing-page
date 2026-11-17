@@ -86,9 +86,10 @@
   color: var(--color-text);
 }
 
-/* Sur écran étroit, on décale le cadrage vers la droite pour garder le visage de Céline visible */
+/* Sur écran étroit : version verticale recadrée sur le visage par Cloudinary (plus légère).
+   Le point de bascule (800px) doit rester aligné avec HERO_MOBILE_MAX dans images.ts. */
 @media (max-width: 800px) {
   #hero {
-    background-position: 80% center;
+    background-image: linear-gradient(var(--color-overlay), var(--color-overlay)), var(--hero-bg-mobile);
   }
 }
