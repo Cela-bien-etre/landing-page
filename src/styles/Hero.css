@@ -85,3 +85,10 @@
 #hero .button {
   color: var(--color-text);
 }
+
+/* Sur écran étroit, on décale le cadrage vers la droite pour garder le visage de Céline visible */
+@media (max-width: 800px) {
+  #hero {
+    background-position: 80% center;
+  }
+}

@@ -4,48 +4,61 @@
 
 export const images = {
   // Logo « Céla Bien-être » (idéalement PNG/SVG sur fond transparent)
-  logo: '',
+  logo: "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794905818/Hello_Site_internet_1.png",
   // Petit motif rond doré décoratif
-  ornement: '',
+  ornement:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794905819/Hello_Site_internet.png",
 
   // 1. Hero : photo de fond (Céline)
-  hero: '',
+  hero: "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541602/DSC_0310.jpg",
 
   // 2. Qui suis-je : portrait avec les fleurs
-  portrait: '',
+  portrait:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793542471/Untitled_Design.png",
 
   // 4. Vous pouvez faire appel à moi
-  formuleDomicile: '',
-  formuleJeune: '',
-  formuleYoga: '',
+  formuleDomicile:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541846/Copy_of_Event.jpg",
+  formuleJeune:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541896/8fd491bb-1768-4e6f-95b4-9ed67d4ad3cb.jpg",
+  formuleYoga:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541454/Yoga_coucher_de_soleil.jpg",
 
   // 5. Les soins à domicile (une image par bloc de 2 soins)
-  soins1: '',
-  soins2: '',
-  soins3: '',
+  soins1:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541846/Copy_of_Event.jpg",
+  soins2:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541846/Copy_of_Event.jpg",
+  soins3:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541846/Copy_of_Event.jpg",
 
   // 6. Séjours de jeûne : les 3 collages
-  jeune1: '',
-  jeune2: '',
-  jeune3: '',
+  jeune1:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541456/Je%C3%BBne3.png",
+  jeune2:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541454/Je%C3%BBne1.png",
+  jeune3:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541232/Je%C3%BBne2.png",
 
   // 6. Les zones les plus réceptives
-  zoneDos: '',
-  zoneVentre: '',
-  zoneTete: '',
-  zonePieds: '',
+  zoneDos: "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793542978/t.png",
+  zoneVentre:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541599/DSC_0314.jpg",
+  zoneTete:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793542833/Untitled_Design_1.png",
+  zonePieds: "",
 
   // 7. Le soin Régénérant
-  soinRegenerant: '',
+  soinRegenerant: "",
 
   // 8. Retraites de yoga
-  retraiteYoga: '',
+  retraiteYoga: "",
 
   // 9. Mes prestations (bloc Planity)
-  prestations: '',
+  prestations: "",
 
   // 10. Contact : photo de fond
-  contact: '',
+  contact: "",
 };
 
 /**
@@ -53,7 +66,10 @@ export const images = {
  * à une URL Cloudinary. Les autres URL sont renvoyées telles quelles.
  */
 export function cld(url: string, width?: number): string {
-  if (!url.includes('res.cloudinary.com') || !url.includes('/upload/')) return url;
-  const transforms = ['f_auto', 'q_auto', width ? `w_${width}` : null].filter(Boolean).join(',');
-  return url.replace('/upload/', `/upload/${transforms}/`);
+  if (!url.includes("res.cloudinary.com") || !url.includes("/upload/"))
+    return url;
+  const transforms = ["f_auto", "q_auto", width ? `w_${width}` : null]
+    .filter(Boolean)
+    .join(",");
+  return url.replace("/upload/", `/upload/${transforms}/`);
 }
