@@ -2,7 +2,7 @@
   padding: 1.5rem 1rem;
   background: var(--color-bg-alt);
   font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   color: var(--color-text-light);
 }
 
@@ -18,5 +18,5 @@
 }
 
 .footer a:hover {
-  color: var(--color-gold);
+  text-decoration-thickness: 2px;
 }

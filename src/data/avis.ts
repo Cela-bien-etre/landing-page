@@ -2,6 +2,8 @@ export interface Avis {
   nom: string;
   texte: string;
   note: number;
+  /** Langue du texte si ce n'est pas le français (ex. 'en'), pour la bonne prononciation des lecteurs d'écran */
+  lang?: string;
 }
 
 export const avis: Avis[] = [
@@ -14,6 +16,7 @@ export const avis: Avis[] = [
   {
     // TODO : garder en anglais ou traduire ?
     nom: 'Andrew',
+    lang: 'en',
     texte:
       'Honestly, what amazing massages! Truly incredible… so much gentleness and firmness, so much attention… What an ability to be attentive to every micro-reaction to reach that level! Absolutely incredible ❤️. Thank you so much for listening so attentively and for the incredible relaxation that comes with it! It goes without saying that I recommend her without any reservation whatsoever!!! A truly exceptional massage therapist.',
     note: 5,

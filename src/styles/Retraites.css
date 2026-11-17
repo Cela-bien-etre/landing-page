@@ -21,7 +21,7 @@
 }
 
 .retraites-link:hover {
-  color: var(--color-gold);
+  text-decoration-thickness: 2px;
 }
 
 .retraites-photo {

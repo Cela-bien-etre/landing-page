@@ -23,7 +23,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(60, 50, 40, 0.25);
+  background: rgba(60, 50, 40, 0.35);
 }
 
 .formule-card:hover .photo {

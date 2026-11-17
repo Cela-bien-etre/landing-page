@@ -21,7 +21,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(70, 50, 40, 0.3);
+  background: rgba(70, 50, 40, 0.4);
 }
 
 .prestations-content {
@@ -84,17 +84,17 @@
 }
 
 .avis-header {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   margin-bottom: 0.5rem;
 }
 
 .avis-header span {
   color: var(--color-text-light);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
 }
 
 .avis-texte {
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   line-height: 1.5;
   margin: 0;
 }
@@ -105,6 +105,7 @@
   bottom: -1rem;
   padding: 0.25rem 0.9rem;
   border-radius: 999px;
+  margin: 0;
   background: #fdd35c;
   font-size: 0.9rem;
   font-weight: 600;

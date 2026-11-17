@@ -3,13 +3,13 @@
   /* Couleurs relevées sur la maquette Canva */
   --color-bg: #f9f8f0;          /* fond crème (sections par défaut) */
   --color-bg-alt: #efeee7;      /* fond beige (séjours de jeûne, footer) */
-  --color-gold: #ccbe6f;        /* titres dorés */
+  --color-gold: #988936;        /* titres dorés : #ccbe6f de la maquette foncé pour atteindre 3:1 (accessibilité) */
   --color-gold-light: #d5c578;  /* bouton */
   --color-text: #403f3e;        /* texte gris noir */
   --color-text-light: #5c5952;  /* texte secondaire (mentions, dates d'avis…) */
   --color-text-inverse: #f9f8f0; /* texte clair sur photo */
   --color-white: #fff;
-  --color-overlay: rgba(90, 66, 52, 0.35);
+  --color-overlay: rgba(90, 66, 52, 0.45);
   --color-placeholder: #e2e0d4;
   --color-error: #a63d2f;
 
@@ -94,7 +94,7 @@ a {
   text-transform: uppercase;
   letter-spacing: 0.3em;
   color: var(--color-gold);
-  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-size: 1.5rem; /* 24px min : seuil « grand texte » pour le contraste des titres dorés */
   font-weight: 400;
 }
 
@@ -148,6 +148,32 @@ a {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-gold);
+  outline: 2px solid var(--color-text);
   outline-offset: 3px;
+}
+
+/* Sur les zones à photo de fond, contour clair pour rester visible */
+#hero :focus-visible,
+.prestations :focus-visible,
+.formule-card:focus-visible,
+.contact-intro :focus-visible {
+  outline-color: var(--color-text-inverse);
+}
+
+/* Respecte le réglage « réduire les animations » du système */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+
+  .button:hover,
+  .formule-card:hover .photo {
+    transform: none;
+  }
 }

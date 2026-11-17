@@ -1,8 +1,8 @@
 .contact {
   padding: 4rem 1rem 2.5rem;
   color: var(--color-text-inverse);
-  background-color: #b5a597;
-  background-image: linear-gradient(rgba(120, 100, 85, 0.35), rgba(120, 100, 85, 0.35)), var(--contact-bg);
+  background-color: #8f7f72;
+  background-image: linear-gradient(rgba(120, 100, 85, 0.45), rgba(120, 100, 85, 0.45)), var(--contact-bg);
   background-size: cover;
   background-position: center;
 }
@@ -54,6 +54,12 @@
   color: #9a6b3f;
 }
 
+.form-required-note {
+  margin: 0 0 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
 .contact-form .optional {
   font-size: 0.85em;
   color: var(--color-text-light);
@@ -63,7 +69,7 @@
 .contact-form textarea {
   width: 100%;
   padding: 0.6rem 0.75rem;
-  border: 1px solid #8c8a84;
+  border: 1px solid #77756f;
   border-radius: 6px;
   background: transparent;
   font: inherit;
@@ -81,7 +87,7 @@
   align-items: flex-start;
   margin-bottom: 0;
   font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .contact-rgpd input {
@@ -105,7 +111,7 @@
   gap: 1.5rem;
   margin-top: 3rem;
   font-family: var(--font-heading);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   text-transform: uppercase;
 }
 
@@ -119,7 +125,7 @@
 .field-error {
   margin: 0.4rem 0 0;
   font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-error);
 }
@@ -171,7 +177,7 @@
 .form-status {
   margin: 0.75rem 0 0;
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 600;
 }
 

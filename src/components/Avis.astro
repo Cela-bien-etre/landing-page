@@ -24,7 +24,7 @@ import Ornement from './ui/Ornement.astro';
           rel="noopener noreferrer"
           aria-disabled={site.planityUrl ? undefined : 'true'}
         >
-          Réserver sur Planity
+          Réserver sur Planity<span class="sr-only"> (nouvel onglet)</span>
         </a>
       </div>
     </div>
@@ -39,11 +39,12 @@ import Ornement from './ui/Ornement.astro';
                 <p class="avis-header">
                   <strong>{a.nom}</strong> <span>• Client</span>
                 </p>
-                <p class="avis-texte">{a.texte}</p>
+                <p class="avis-texte" lang={a.lang}>{a.texte}</p>
               </blockquote>
-              <span class="avis-note" aria-label={`Note : ${a.note} sur 5`}>
-                ★ {a.note.toFixed(1)}
-              </span>
+              <p class="avis-note">
+                <span aria-hidden="true">★ {a.note.toFixed(1)}</span>
+                <span class="sr-only">Note : {a.note} sur 5</span>
+              </p>
             </li>
           ))
         }

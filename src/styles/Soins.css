@@ -1,5 +1,5 @@
 .soins-subtitle {
-  font-size: 0.8em;
+  font-size: max(0.8em, 1.5rem); /* 24px min (contraste) */
 }
 
 .soins-bloc {

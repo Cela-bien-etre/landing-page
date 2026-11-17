@@ -31,11 +31,11 @@ const heroStyle = heroImages
       <cite>{site.owner}</cite>
     </blockquote>
     <div class="hero-actions">
-      <a href="#contact" class="button button--light">Let's connect</a>
+      <a href="#contact" class="button button--light" lang="en">Let's connect</a>
       {
         site.planityUrl && (
           <a href={site.planityUrl} class="button" target="_blank" rel="noopener noreferrer">
-            Réserver sur Planity
+            Réserver sur Planity<span class="sr-only"> (nouvel onglet)</span>
           </a>
         )
       }
