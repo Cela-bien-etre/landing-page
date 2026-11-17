@@ -4,10 +4,10 @@
 
 export const images = {
   // Logo « Céla Bien-être » (idéalement PNG/SVG sur fond transparent)
-  logo: "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794905818/Hello_Site_internet_1.png",
+  logo: "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794946340/cela_logo_fond_transparent.png",
   // Petit motif rond doré décoratif
   ornement:
-    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794905819/Hello_Site_internet.png",
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794944995/Boule-fond-transparent.png",
 
   // 1. Hero : photo de fond (Céline)
   hero: "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541602/DSC_0310.jpg",
@@ -46,19 +46,24 @@ export const images = {
     "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541599/DSC_0314.jpg",
   zoneTete:
     "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793542833/Untitled_Design_1.png",
-  zonePieds: "",
+  zonePieds:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794945318/pieds.png",
 
   // 7. Le soin Régénérant
-  soinRegenerant: "",
+  soinRegenerant:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794945440/Hello_Site_internet_5.png",
 
   // 8. Retraites de yoga
-  retraiteYoga: "",
+  retraiteYoga:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541454/Yoga_coucher_de_soleil.jpg",
 
   // 9. Mes prestations (bloc Planity)
-  prestations: "",
+  prestations:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794945442/Hello_Site_internet_6.png",
 
   // 10. Contact : photo de fond
-  contact: "",
+  contact:
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794905821/Hello_Site_internet_2.png",
 };
 
 /**

@@ -30,6 +30,15 @@ const heroStyle = heroImages
       <p>« La meilleure façon de se reconnecter à Soi est de toucher le corps avec l'intention de l'écouter avec le cœur. »</p>
       <cite>{site.owner}</cite>
     </blockquote>
-    <a href="#contact" class="button button--light">Let's connect</a>
+    <div class="hero-actions">
+      <a href="#contact" class="button button--light">Let's connect</a>
+      {
+        site.planityUrl && (
+          <a href={site.planityUrl} class="button" target="_blank" rel="noopener noreferrer">
+            Réserver sur Planity
+          </a>
+        )
+      }
+    </div>
   </div>
 </header>

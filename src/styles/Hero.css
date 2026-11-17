@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   padding: 8rem 1rem 4rem;
-  color: var(--color-white);
+  color: var(--color-text-inverse);
   text-align: center;
   background-color: #8c7263;
   background-image: linear-gradient(var(--color-overlay), var(--color-overlay)), var(--hero-bg);
@@ -80,6 +80,13 @@
   display: block;
   text-align: right;
   font-style: normal;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 }
 
 #hero .button {

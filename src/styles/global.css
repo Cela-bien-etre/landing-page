@@ -1,12 +1,13 @@
 /* Variables et styles de base partagés par tout le site */
 :root {
   /* Couleurs relevées sur la maquette Canva */
-  --color-bg: #f8f8f0;          /* fond crème */
-  --color-bg-alt: #efefe3;      /* fond beige (séjours de jeûne) */
-  --color-gold: #c4b77e;        /* titres dorés */
+  --color-bg: #f9f8f0;          /* fond crème (sections par défaut) */
+  --color-bg-alt: #efeee7;      /* fond beige (séjours de jeûne, footer) */
+  --color-gold: #ccbe6f;        /* titres dorés */
   --color-gold-light: #d5c578;  /* bouton */
-  --color-text: #3a3833;
-  --color-text-light: #5c5952;
+  --color-text: #403f3e;        /* texte gris noir */
+  --color-text-light: #5c5952;  /* texte secondaire (mentions, dates d'avis…) */
+  --color-text-inverse: #f9f8f0; /* texte clair sur photo */
   --color-white: #fff;
   --color-overlay: rgba(90, 66, 52, 0.35);
   --color-placeholder: #e2e0d4;

@@ -1,6 +1,6 @@
 .contact {
   padding: 4rem 1rem 2.5rem;
-  color: var(--color-white);
+  color: var(--color-text-inverse);
   background-color: #b5a597;
   background-image: linear-gradient(rgba(120, 100, 85, 0.35), rgba(120, 100, 85, 0.35)), var(--contact-bg);
   background-size: cover;
