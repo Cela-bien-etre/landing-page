@@ -1,3 +1,7 @@
+#formules {
+  background-color: #efeee7;
+}
+
 .formules-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
