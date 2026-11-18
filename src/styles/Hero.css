@@ -51,6 +51,13 @@
   margin: 0 0 0.5rem;
 }
 
+.hero-lieu {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.55em;
+  letter-spacing: 0.08em;
+}
+
 .hero-soins {
   font-family: var(--font-heading);
   text-transform: uppercase;

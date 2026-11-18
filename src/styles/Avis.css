@@ -111,6 +111,11 @@
   font-weight: 600;
 }
 
+.avis-google {
+  margin: 3rem 0 0;
+  text-align: center;
+}
+
 @media (max-width: 800px) {
   .avis-layout {
     grid-template-columns: 1fr;

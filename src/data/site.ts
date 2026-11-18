@@ -4,19 +4,39 @@ export const site = {
   owner: "Céline",
 
   // SEO : titre ≈ 60 caractères max, description ≈ 155 caractères max.
-  // 💡 Ajouter la ville / zone dans le titre et la description dès qu'elle est connue
-  //    (ex. « Massage à domicile à Rodez »), c'est le levier n°1 pour être trouvée localement.
-  title: "Massage à domicile & Toucher Conscient | Céla Bien-être",
+  // La ville dans le titre et la description est le levier n°1 pour être trouvée localement.
+  title: "Massage à domicile à Soustons (Landes) | Céla Bien-être",
   description:
-    "Massages à domicile, en séjour de jeûne ou en retraite de yoga avec Céline : deep tissue, sportif, réflexologie plantaire, kobido, reiki.",
+    "Massages à domicile à Soustons et alentours (Seignosse, Hossegor, Vieux-Boucau…) avec Céline : deep tissue, sportif, réflexologie, kobido, reiki.",
 
   domain: "www.cela-bien-etre.com",
 
-  // Zone d'intervention (villes, département…) : alimente les données structurées pour Google.
-  areaServed: [] as string[], // TODO ex. ['Rodez', 'Aveyron']
+  // Ville de rattachement (sans adresse précise : Céline se déplace à domicile).
+  city: "Soustons",
+  postalCode: "40140",
+  region: "Landes",
 
-  //email: "", // TODO
+  // Zone d'intervention : alimente les données structurées pour Google.
+  // À ajuster avec Céline (idéalement la même liste que sur sa fiche Google).
+  areaServed: [
+    "Soustons",
+    "Vieux-Boucau-les-Bains",
+    "Messanges",
+    "Azur",
+    "Moliets-et-Maâ",
+    "Seignosse",
+    "Soorts-Hossegor",
+    "Capbreton",
+    "Angresse",
+    "Tosse",
+    "Saint-Geours-de-Maremne",
+    "Magescq",
+  ],
+
+  email: "", // TODO
   phone: "", // TODO (format international conseillé : +33 6 12 34 56 78)
   instagram: "", // TODO : URL complète du profil
+  // Lien de partage de la fiche Google (Google Business Profile)
+  googleBusinessUrl: "https://maps.app.goo.gl/du14ZRGC7cBLkR3X9",
   planityUrl: "https://www.planity.com/cela-bien-etre-40140-soustons", // TODO : lien de la page Planity de Céline
 };

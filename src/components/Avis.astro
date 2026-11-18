@@ -49,6 +49,15 @@ import Ornement from './ui/Ornement.astro';
           ))
         }
       </ul>
+      {
+        site.googleBusinessUrl && (
+          <p class="avis-google">
+            <a href={site.googleBusinessUrl} class="button" target="_blank" rel="noopener noreferrer">
+              Voir tous les avis sur Google<span class="sr-only"> (nouvel onglet)</span>
+            </a>
+          </p>
+        )
+      }
     </div>
   </div>
   <Ornement position="bottom-right" />

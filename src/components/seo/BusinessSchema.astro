@@ -10,7 +10,8 @@ import { images, ogImage } from '../../data/images';
 const url = new URL('/', Astro.site).href;
 const prix = (p: string) => p.replace(/[^\d.,]/g, '').replace(',', '.');
 const tousLesPrix = soins.flatMap((s) => s.tarifs.map((t) => Number(prix(t.prix))));
-const sameAs = [site.instagram, site.planityUrl].filter(Boolean);
+// Autres pages officielles de l'activité : aident Google à relier le site, la fiche Google et les profils
+const sameAs = [site.googleBusinessUrl, site.instagram, site.planityUrl].filter(Boolean);
 
 const schema = {
   '@context': 'https://schema.org',
@@ -23,7 +24,20 @@ const schema = {
   ...(images.logo && { logo: images.logo }),
   ...(site.phone && { telephone: site.phone }),
   ...(site.email && { email: site.email }),
-  ...(site.areaServed.length && { areaServed: site.areaServed }),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: site.city,
+    postalCode: site.postalCode,
+    addressRegion: site.region,
+    addressCountry: 'FR',
+  },
+  ...(site.areaServed.length && {
+    areaServed: [
+      ...site.areaServed.map((name) => ({ '@type': 'City', name })),
+      { '@type': 'AdministrativeArea', name: site.region },
+    ],
+  }),
+  ...(site.googleBusinessUrl && { hasMap: site.googleBusinessUrl }),
   ...(sameAs.length && { sameAs }),
   priceRange: `${Math.min(...tousLesPrix)}€ - ${Math.max(...tousLesPrix)}€`,
   currenciesAccepted: 'EUR',
