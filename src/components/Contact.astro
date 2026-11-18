@@ -7,6 +7,7 @@ const bg = images.contact ? `url(${cld(images.contact, 1920)})` : 'none';
 
 // Messages affichés par le script du formulaire
 const errors = {
+  profil: 'Merci d’indiquer si vous êtes un particulier ou un professionnel.',
   name: 'Merci d’indiquer votre nom.',
   email: 'Merci d’indiquer une adresse email valide.',
   phone: 'Ce numéro de téléphone ne semble pas valide.',
@@ -44,6 +45,21 @@ const statusLabels = {
         <input type="hidden" name="form-name" value="contact" />
         <p hidden><label>Ne pas remplir : <input name="bot-field" /></label></p>
         <p class="form-required-note">Les champs marqués d'un <span class="required">*</span> sont obligatoires.</p>
+
+        <fieldset class="form-group contact-profil">
+          <legend>Vous êtes <span class="required" aria-hidden="true">*</span></legend>
+          <div class="contact-profil-options">
+            <label>
+              <input type="radio" name="profil" value="Particulier" required aria-describedby="profil-error" />
+              <span>Un particulier</span>
+            </label>
+            <label>
+              <input type="radio" name="profil" value="Professionnel" aria-describedby="profil-error" />
+              <span>Un professionnel <span class="optional">(séjour, retraite…)</span></span>
+            </label>
+          </div>
+          <p class="field-error" id="profil-error" hidden></p>
+        </fieldset>
 
         <div class="form-group">
           <label for="contact-name">Nom <span class="required" aria-hidden="true">*</span></label>
@@ -121,6 +137,7 @@ const statusLabels = {
 
     const errorMessage = (field) => {
       if (field.name === 'rgpd') return errors.consent;
+      if (field.name === 'profil') return errors.profil;
       if (field.type === 'email') return errors.email;
       if (field.type === 'tel') return errors.phone;
       if (field.name === 'message') return errors.message;
@@ -131,12 +148,14 @@ const statusLabels = {
     const setFieldState = (field) => {
       const id = field.getAttribute('aria-describedby');
       const errorEl = id ? document.getElementById(id) : null;
+      // Boutons radio : l'état (valide ou non) s'applique à tout le groupe
+      const group = field.type === 'radio' ? [...form.querySelectorAll(`input[name="${field.name}"]`)] : [field];
       if (field.checkValidity()) {
-        field.removeAttribute('aria-invalid');
+        group.forEach((f) => f.removeAttribute('aria-invalid'));
         if (errorEl) errorEl.hidden = true;
         return true;
       }
-      field.setAttribute('aria-invalid', 'true');
+      group.forEach((f) => f.setAttribute('aria-invalid', 'true'));
       if (errorEl) {
         errorEl.textContent = errorMessage(field);
         errorEl.hidden = false;

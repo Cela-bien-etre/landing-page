@@ -15,7 +15,7 @@ export const site = {
   // Zone d'intervention (villes, département…) : alimente les données structurées pour Google.
   areaServed: [] as string[], // TODO ex. ['Rodez', 'Aveyron']
 
-  email: "", // TODO
+  //email: "", // TODO
   phone: "", // TODO (format international conseillé : +33 6 12 34 56 78)
   instagram: "", // TODO : URL complète du profil
   planityUrl: "https://www.planity.com/cela-bien-etre-40140-soustons", // TODO : lien de la page Planity de Céline

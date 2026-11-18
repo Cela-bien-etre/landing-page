@@ -4,6 +4,7 @@ import { images } from '../data/images';
 import { soins } from '../data/soins';
 import Photo from './ui/Photo.astro';
 import Ornement from './ui/Ornement.astro';
+import { site } from '../data/site';
 
 // Les soins sont présentés par blocs de 2, avec l'image alternativement à gauche / à droite
 const blocImages = [images.soins1, images.soins2, images.soins3];
@@ -41,6 +42,16 @@ const blocs = blocImages.map((image, i) => ({ image, soins: soins.slice(i * 2, i
           </ul>
         </div>
       ))
+    }
+
+    {
+      site.planityUrl && (
+        <div class="soins-actions">
+          <a href={site.planityUrl} class="button" target="_blank" rel="noopener noreferrer">
+            Réserver sur Planity<span class="sr-only"> (nouvel onglet)</span>
+          </a>
+        </div>
+      )
     }
   </div>
 </section>
