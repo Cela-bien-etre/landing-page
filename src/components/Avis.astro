@@ -21,7 +21,7 @@ const [prestations1, prestations2] = t.avis.prestationsTexte;
           {prestations1}<br />
           {prestations2}
         </p>
-        <h2 class="prestations-title">{t.avis.prestationsTitle}</h2>
+        {t.avis.prestationsTitle && <h2 class="prestations-title">{t.avis.prestationsTitle}</h2>}
         <a
           href={site.planityUrl || undefined}
           class="button button--light"

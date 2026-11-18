@@ -166,7 +166,7 @@ const fr = {
 
   avis: {
     prestationsTexte: ["Retrouvez l'ensemble des soins que je propose sur Planity.", 'Vous pourrez également y réserver directement.'],
-    prestationsTitle: 'Mes prestations',
+    prestationsTitle: '', // vide = pas de titre affiché
     title: "Ils m'ont fait confiance",
     client: 'Client',
     traduit: 'traduit de l’anglais',

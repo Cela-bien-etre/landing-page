@@ -164,7 +164,7 @@ const en: Dictionary = {
 
   avis: {
     prestationsTexte: ['Find all the treatments I offer on Planity.', 'You can also book directly there.'],
-    prestationsTitle: 'My treatments',
+    prestationsTitle: '', // vide = pas de titre affiché
     title: 'They trusted me',
     client: 'Client',
     traduit: 'translated from French',
