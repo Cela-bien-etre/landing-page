@@ -1,0 +1,30 @@
+---
+// Page de secours : Netlify y redirige après un envoi que le script n'a pas intercepté
+// (JavaScript désactivé ou pas encore chargé). Sans elle, le visiteur verrait une 404.
+import Layout from '../../layouts/Layout.astro';
+import { site } from '../../data/site';
+import { getLang, useTranslations, routes } from '../../i18n';
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+---
+
+<Layout page="thanks" title={t.merci.metaTitle} noindex>
+  <main class="section container merci">
+    <h1 class="section-title">{t.merci.title}</h1>
+    <p>{t.merci.text}</p>
+    <p>{site.owner}</p>
+    <a href={routes.home[lang]} class="button">{t.merci.back}</a>
+  </main>
+</Layout>
+
+<style>
+  .merci {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+</style>

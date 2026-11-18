@@ -1,14 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Footer from '../components/Footer.astro';
-import { site } from '../data/site';
+import Page from '../components/pages/LegalPage.astro';
 ---
 
-<Layout title={`Mentions légales | ${site.name}`} description={`Mentions légales et politique de confidentialité du site ${site.name}.`}>
-  <main class="section container">
-    <a href="/">← Retour à l'accueil</a>
-    <h1 class="section-title">Mentions légales</h1>
-    <!-- TODO : éditrice (nom, statut, SIRET, adresse, contact), hébergeur (Netlify, Inc.), données personnelles (formulaire de contact) -->
-  </main>
-  <Footer />
-</Layout>
+<Page />

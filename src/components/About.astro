@@ -1,18 +1,18 @@
 ---
 import '../styles/About.css';
 import { images } from '../data/images';
+import { getLang, useTranslations } from '../i18n';
 import Photo from './ui/Photo.astro';
+
+const t = useTranslations(getLang(Astro.currentLocale));
 ---
 
 <section id="a-propos" class="about">
   <div class="about-text">
-    <h2 class="section-title">Je vous accompagne à prendre conscience de vos besoins à travers le Toucher Conscient.</h2>
-    <p>Depuis l'enfance, j'aime prendre soin des gens qui me sont chers, les écouter, faire attention à leur bien-être, leur faire plaisir par de petites attentions…</p>
-    <p>C'est cet Amour de l'autre qui m'a guidée vers le massage.</p>
-    <p>Masser quelqu'un, ce n'est pas juste toucher un corps, c'est s'y connecter, s'investir, plonger dans l'intention de faire du bien. C'est un échange subtil d'âme à âme. C'est puissant.</p>
-    <p>Au fil de ces dix-huit années de pratique, je me suis trouvée et épanouie dans ce rapport à l'autre, authentique, individualisé et privilégié.</p>
+    <h2 class="section-title">{t.about.title}</h2>
+    {t.about.paragraphs.map((p) => <p>{p}</p>)}
   </div>
   <div class="about-photo">
-    <Photo src={images.portrait} alt="Portrait de Céline parmi les fleurs" width={900} />
+    <Photo src={images.portrait} alt={t.about.photoAlt} width={900} />
   </div>
 </section>

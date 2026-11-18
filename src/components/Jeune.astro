@@ -1,94 +1,62 @@
 ---
 import '../styles/Jeune.css';
 import { images } from '../data/images';
+import { getLang, useTranslations, fill } from '../i18n';
 import Photo from './ui/Photo.astro';
 import Ornement from './ui/Ornement.astro';
 
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+
 const zones = [
-  {
-    zone: 'Le dos',
-    etat: 'Tendu',
-    image: images.zoneDos,
-    texte: [
-      "Par des mouvements doux ou profonds, le massage du dos va permettre de libérer les tensions. Ce n'est pas pour rien que l'on dit : « j'en ai plein le dos ».",
-      "Que l'on aille chercher les nœuds ou que l'on enveloppe généreusement le corps, qu'importe, tant que le Toucher résonne de façon juste dans le corps.",
-    ],
-  },
-  {
-    zone: 'Le ventre',
-    etat: 'Noué',
-    image: images.zoneVentre,
-    texte: [
-      'Le ventre est le centre de nos émotions. Il nous parle !',
-      "Les émotions les plus enfouies se cachent dans le ventre ; masser le ventre les libère, et une sensation d'ouverture du plexus solaire se crée instantanément.",
-      'La respiration devient alors plus fluide, naturelle et pleine.',
-    ],
-  },
-  {
-    zone: 'La tête',
-    etat: 'Embrumée',
-    image: images.zoneTete,
-    texte: [
-      "Le stress est caractérisé par une charge mentale intense et dense. Une sensation de brouillard mental empêche d'y voir clair.",
-      "Masser le visage et le cuir chevelu dissipe immédiatement cette image. L'esprit s'évade pour mieux se retrouver dans l'instant présent et le monde physique. La pensée devient alors claire, facile, et un sentiment de paix apparaît.",
-    ],
-  },
-  {
-    zone: 'Les pieds',
-    etat: 'Gonflés',
-    image: images.zonePieds,
-    texte: [
-      'Cette zone est constamment sollicitée du fait de la posture debout. Les pieds emmagasinent les toxines. Ils supportent tout !',
-      "Le massage favorise la circulation sanguine, donc l'élimination de ces toxines. Il aide à drainer, à dégonfler, et une sensation de légèreté se fait sentir.",
-    ],
-  },
+  { ...t.jeune.zones.dos, image: images.zoneDos },
+  { ...t.jeune.zones.ventre, image: images.zoneVentre },
+  { ...t.jeune.zones.tete, image: images.zoneTete },
+  { ...t.jeune.zones.pieds, image: images.zonePieds },
 ];
+const [alt1, alt2, alt3] = t.jeune.collageAlts;
 ---
 
 <section id="jeune" class="section section--alt">
   <Ornement />
   <div class="container">
     <h2 class="section-title section-title--center">
-      Séjours de jeûne :<br />Un accompagnement sur mesure
+      {t.jeune.title}<br />{t.jeune.subtitle}
     </h2>
 
     <div class="jeune-collages">
-      <div class="jeune-collage"><Photo src={images.jeune1} alt="Séjour de jeûne : jus et collations" width={600} /></div>
-      <div class="jeune-collage jeune-collage--center"><Photo src={images.jeune2} alt="Massage pendant un séjour de jeûne" width={700} /></div>
-      <div class="jeune-collage"><Photo src={images.jeune3} alt="Massage en pleine nature" width={600} /></div>
+      <div class="jeune-collage"><Photo src={images.jeune1} alt={alt1} width={600} /></div>
+      <div class="jeune-collage jeune-collage--center"><Photo src={images.jeune2} alt={alt2} width={700} /></div>
+      <div class="jeune-collage"><Photo src={images.jeune3} alt={alt3} width={600} /></div>
     </div>
 
-    <h3 class="title-spaced zones-title">Les zones les plus réceptives</h3>
+    <h3 class="title-spaced zones-title">{t.jeune.zonesTitle}</h3>
     <div class="zones-grid">
       {
         zones.map((z) => (
           <article class="zone">
             <div class="zone-photo">
-              <Photo src={z.image} alt={`Massage : ${z.zone.toLowerCase()}`} width={500} />
+              <Photo src={z.image} alt={fill(t.jeune.zonePhotoAlt, { zone: z.zone.toLocaleLowerCase(lang) })} width={500} />
             </div>
             <h4 class="zone-nom">
               <span class="zone-zone">{z.zone}</span>
               <span class="zone-etat">{z.etat}</span>
             </h4>
-            {z.texte.map((t) => <p>{t}</p>)}
+            {z.texte.map((p) => <p>{p}</p>)}
           </article>
         ))
       }
     </div>
 
     <div class="regenerant">
-      <h3 class="title-spaced regenerant-title">Un soin spécialement créé pour les jeûneurs</h3>
+      <h3 class="title-spaced regenerant-title">{t.jeune.regenerantTitle}</h3>
       <div class="regenerant-content">
         <div class="regenerant-photo">
-          <Photo src={images.soinRegenerant} alt="Céline réalisant le soin Régénérant" width={700} />
+          <Photo src={images.soinRegenerant} alt={t.jeune.regenerantPhotoAlt} width={700} />
         </div>
         <div class="regenerant-text">
-          <h4>Le soin Régénérant</h4>
-          <p>
-            Il combine les techniques du Kobido, de la réflexologie plantaire et un travail du ventre afin de se focaliser sur la détox de
-            l'organisme. Il draine, stimule, dénoue les tensions et réénergise l'ensemble du corps.
-          </p>
-          <p>Sensation de légèreté et de bien-être absolu.</p>
+          <h4>{t.jeune.regenerantNom}</h4>
+          {t.jeune.regenerantTexte.map((p) => <p>{p}</p>)}
         </div>
       </div>
     </div>

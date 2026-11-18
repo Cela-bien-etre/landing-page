@@ -93,6 +93,11 @@
   font-size: 0.875rem;
 }
 
+.avis-traduit {
+  margin-left: 0.25rem;
+  font-style: italic;
+}
+
 .avis-texte {
   font-size: 0.95rem;
   line-height: 1.5;

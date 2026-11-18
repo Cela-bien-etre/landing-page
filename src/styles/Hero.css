@@ -21,6 +21,12 @@
   text-decoration: none;
 }
 
+.hero-lang {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
 .hero-logo img {
   width: clamp(160px, 25vw, 320px);
   height: auto;

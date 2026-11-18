@@ -1,26 +1,5 @@
 ---
-// Page de secours : Netlify y redirige après un envoi que le script n'a pas intercepté
-// (JavaScript désactivé ou pas encore chargé). Sans elle, le visiteur verrait une 404.
-import Layout from '../layouts/Layout.astro';
-import { site } from '../data/site';
+import Page from '../components/pages/ThanksPage.astro';
 ---
 
-<Layout title={`Merci — ${site.name}`} noindex>
-  <main class="section container merci">
-    <h1 class="section-title">Merci pour votre message !</h1>
-    <p>Je vous recontacte très vite.</p>
-    <p>{site.owner}</p>
-    <a href="/" class="button">Retour à l'accueil</a>
-  </main>
-</Layout>
-
-<style>
-  .merci {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-</style>
+<Page />

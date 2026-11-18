@@ -3,11 +3,7 @@ export const site = {
   name: "Céla Bien-être",
   owner: "Céline",
 
-  // SEO : titre ≈ 60 caractères max, description ≈ 155 caractères max.
-  // La ville dans le titre et la description est le levier n°1 pour être trouvée localement.
-  title: "Massage à domicile à Soustons (Landes) | Céla Bien-être",
-  description:
-    "Massages à domicile à Soustons et alentours (Seignosse, Hossegor, Vieux-Boucau…) avec Céline : deep tissue, sportif, réflexologie, kobido, reiki.",
+  // Titre et description (SEO) : dans src/i18n/fr.ts et en.ts (meta), une version par langue.
 
   domain: "www.cela-bien-etre.com",
 

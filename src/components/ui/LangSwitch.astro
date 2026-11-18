@@ -1,0 +1,66 @@
+---
+// Sélecteur de langue FR / EN : renvoie vers la même page dans l'autre langue.
+import { getLang, useTranslations, languages, langs, routes, type PageKey } from '../../i18n';
+
+interface Props {
+  page: PageKey;
+  /** 'light' : texte clair, sur photo (hero) ; 'dark' : texte foncé, sur fond clair */
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+
+const { page, tone = 'dark', class: className } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+---
+
+<nav class:list={['lang-switch', `lang-switch--${tone}`, className]} aria-label={t.langSwitch.label}>
+  {
+    langs.map((l) => (
+      <a href={routes[page][l]} hreflang={l} lang={languages[l].htmlLang} aria-current={l === lang ? 'page' : undefined} title={languages[l].name}>
+        <span aria-hidden="true">{languages[l].label}</span>
+        <span class="sr-only">{languages[l].name}</span>
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .lang-switch {
+    display: flex;
+    gap: 0.25rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  .lang-switch a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0 0.6rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+
+  .lang-switch--light a {
+    color: var(--color-text-inverse);
+  }
+
+  .lang-switch--dark a {
+    color: var(--color-text);
+  }
+
+  .lang-switch a[aria-current='page'] {
+    border-color: currentColor;
+  }
+
+  .lang-switch a:not([aria-current='page']):hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+</style>

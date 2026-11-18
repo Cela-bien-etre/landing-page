@@ -3,8 +3,13 @@ import '../styles/Avis.css';
 import { images } from '../data/images';
 import { avis } from '../data/avis';
 import { site } from '../data/site';
+import { getLang, useTranslations, fill } from '../i18n';
 import Photo from './ui/Photo.astro';
 import Ornement from './ui/Ornement.astro';
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const [prestations1, prestations2] = t.avis.prestationsTexte;
 ---
 
 <section id="avis" class="section">
@@ -13,10 +18,10 @@ import Ornement from './ui/Ornement.astro';
       <Photo src={images.prestations} alt="" width={800} class="prestations-bg" />
       <div class="prestations-content">
         <p>
-          Retrouvez l'ensemble des soins que je propose sur Planity.<br />
-          Vous pourrez également y réserver directement.
+          {prestations1}<br />
+          {prestations2}
         </p>
-        <h2 class="prestations-title">Mes prestations</h2>
+        <h2 class="prestations-title">{t.avis.prestationsTitle}</h2>
         <a
           href={site.planityUrl || undefined}
           class="button button--light"
@@ -24,26 +29,27 @@ import Ornement from './ui/Ornement.astro';
           rel="noopener noreferrer"
           aria-disabled={site.planityUrl ? undefined : 'true'}
         >
-          Réserver sur Planity<span class="sr-only"> (nouvel onglet)</span>
+          {t.common.bookPlanity}<span class="sr-only">{t.common.newTab}</span>
         </a>
       </div>
     </div>
 
     <div class="avis">
-      <h2 class="avis-title">Ils m'ont fait confiance</h2>
+      <h2 class="avis-title">{t.avis.title}</h2>
       <ul class="avis-list">
         {
           avis.map((a) => (
             <li class="avis-card">
               <blockquote>
                 <p class="avis-header">
-                  <strong>{a.nom}</strong> <span>• Client</span>
+                  <strong>{a.nom}</strong> <span>• {t.avis.client}</span>
+                  {a.langueOriginale !== lang && <span class="avis-traduit">({t.avis.traduit})</span>}
                 </p>
-                <p class="avis-texte" lang={a.lang}>{a.texte}</p>
+                <p class="avis-texte">{t.avis.items[a.id]}</p>
               </blockquote>
               <p class="avis-note">
                 <span aria-hidden="true">★ {a.note.toFixed(1)}</span>
-                <span class="sr-only">Note : {a.note} sur 5</span>
+                <span class="sr-only">{fill(t.avis.note, { note: a.note })}</span>
               </p>
             </li>
           ))
@@ -53,7 +59,7 @@ import Ornement from './ui/Ornement.astro';
         site.googleBusinessUrl && (
           <p class="avis-google">
             <a href={site.googleBusinessUrl} class="button" target="_blank" rel="noopener noreferrer">
-              Voir tous les avis sur Google<span class="sr-only"> (nouvel onglet)</span>
+              {t.avis.google}<span class="sr-only">{t.common.newTab}</span>
             </a>
           </p>
         )

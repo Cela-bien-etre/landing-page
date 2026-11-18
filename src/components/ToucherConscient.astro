@@ -1,26 +1,17 @@
 ---
 import '../styles/ToucherConscient.css';
+import { getLang, useTranslations } from '../i18n';
 import Ornement from './ui/Ornement.astro';
 
-const bienfaits = [
-  'Conscientiser les zones sensibles',
-  'Dénouer les tensions physiques',
-  'Permettre au mental de relâcher',
-  'Déposer le corps en confiance',
-  'Renouer avec le Toucher',
-  "Favoriser l'ouverture du cœur",
-  "S'aligner avec qui l'on est dans sa globalité",
-  'Se reconnecter à Soi',
-  'Optimiser les bienfaits du jeûne ou du séjour de yoga en faisant circuler les fluides et énergies du corps (détox)',
-];
+const t = useTranslations(getLang(Astro.currentLocale));
 ---
 
 <section id="toucher-conscient" class="section">
   <Ornement />
   <div class="container">
-    <h2 class="section-title">Qu'est-ce que le Toucher Conscient ?</h2>
+    <h2 class="section-title">{t.toucher.title}</h2>
     <ul class="bienfaits">
-      {bienfaits.map((b) => <li>{b}</li>)}
+      {t.toucher.bienfaits.map((b) => <li>{b}</li>)}
     </ul>
   </div>
 </section>

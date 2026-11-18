@@ -1,28 +1,23 @@
 ---
 import '../styles/Retraites.css';
 import { images } from '../data/images';
+import { getLang, useTranslations } from '../i18n';
 import Photo from './ui/Photo.astro';
 import Ornement from './ui/Ornement.astro';
+
+const t = useTranslations(getLang(Astro.currentLocale));
 ---
 
 <section id="retraites" class="section">
   <div class="container retraites">
     <div class="retraites-text">
-      <h2 class="section-title">Les retraites de Yoga - Méditation</h2>
-      <p>
-        Lorsque vous organisez une retraite de yoga et que vous souhaitez amener vos yogis au bout de l'expérience que vous proposez, le Toucher
-        Conscient est indispensable !
-      </p>
-      <p>
-        Le massage permet de finaliser le chemin parcouru à travers les différentes pratiques et de revenir à son corps. Chaque geste est
-        conscientisé et ressenti avec une réelle intention.
-      </p>
-      <p>J'ai élaboré une prise en charge spécifique pour ce format…</p>
-      <p class="retraites-note">La durée des massages est ajustée au nombre de personnes.</p>
-      <a href="#contact" class="button retraites-button">Contactez-moi pour plus de renseignements</a>
+      <h2 class="section-title">{t.retraites.title}</h2>
+      {t.retraites.paragraphs.map((p) => <p>{p}</p>)}
+      <p class="retraites-note">{t.retraites.note}</p>
+      <a href="#contact" class="button retraites-button">{t.retraites.contact}</a>
     </div>
     <div class="retraites-photo">
-      <Photo src={images.retraiteYoga} alt="Méditation face à la mer au coucher du soleil" width={600} />
+      <Photo src={images.retraiteYoga} alt={t.retraites.photoAlt} width={600} />
     </div>
   </div>
   <Ornement position="bottom-left" />

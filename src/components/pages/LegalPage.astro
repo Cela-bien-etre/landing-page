@@ -1,0 +1,32 @@
+---
+// Mentions légales, partagées par /mentions-legales et /en/legal-notice.
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../Footer.astro';
+import LangSwitch from '../ui/LangSwitch.astro';
+import { getLang, useTranslations, routes } from '../../i18n';
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+---
+
+<Layout page="legal" title={t.legal.metaTitle} description={t.legal.metaDescription}>
+  <main class="section container">
+    <div class="page-top">
+      <a href={routes.home[lang]}>{t.common.backHome}</a>
+      <LangSwitch page="legal" />
+    </div>
+    <h1 class="section-title">{t.legal.title}</h1>
+    <!-- TODO : éditrice (nom, statut, SIRET, adresse, contact), hébergeur (Netlify, Inc.), données personnelles (formulaire de contact) -->
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+</style>

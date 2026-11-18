@@ -6,19 +6,25 @@
 import { site } from '../../data/site';
 import { soins } from '../../data/soins';
 import { images, ogImage } from '../../data/images';
+import { getLang, useTranslations, routes } from '../../i18n';
 
-const url = new URL('/', Astro.site).href;
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const url = new URL(routes.home[lang], Astro.site).href;
+// Même identifiant dans les deux langues : c'est la même entreprise
+const businessId = `${new URL('/', Astro.site).href}#business`;
 const prix = (p: string) => p.replace(/[^\d.,]/g, '').replace(',', '.');
-const tousLesPrix = soins.flatMap((s) => s.tarifs.map((t) => Number(prix(t.prix))));
+const tousLesPrix = soins.flatMap((s) => s.tarifs.map((tarif) => Number(prix(tarif.prix))));
 // Autres pages officielles de l'activité : aident Google à relier le site, la fiche Google et les profils
 const sameAs = [site.googleBusinessUrl, site.instagram, site.planityUrl].filter(Boolean);
 
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'HealthAndBeautyBusiness',
-  '@id': `${url}#business`,
+  '@id': businessId,
   name: site.name,
-  description: site.description,
+  description: t.meta.description,
   url,
   ...(ogImage && { image: ogImage }),
   ...(images.logo && { logo: images.logo }),
@@ -44,16 +50,17 @@ const schema = {
   founder: { '@type': 'Person', name: site.owner },
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Soins à domicile',
-    itemListElement: soins.flatMap((soin) =>
-      soin.tarifs.map((t) => ({
+    name: t.soins.title.replace(/\s*:$/, ''),
+    itemListElement: soins.flatMap((soin) => {
+      const { nom, description } = t.soins.items[soin.id];
+      return soin.tarifs.map((tarif) => ({
         '@type': 'Offer',
-        name: `${soin.nom} (${t.duree})`,
-        price: prix(t.prix),
+        name: `${nom} (${tarif.duree})`,
+        price: prix(tarif.prix),
         priceCurrency: 'EUR',
-        itemOffered: { '@type': 'Service', name: soin.nom, description: soin.description },
-      })),
-    ),
+        itemOffered: { '@type': 'Service', name: nom, description },
+      }));
+    }),
   },
 };
 ---

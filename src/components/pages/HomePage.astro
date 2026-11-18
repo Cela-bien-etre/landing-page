@@ -1,0 +1,45 @@
+---
+// Page d'accueil, partagée par / (français) et /en/ (anglais) : la langue vient de l'URL.
+import Layout from '../../layouts/Layout.astro';
+import BusinessSchema from '../seo/BusinessSchema.astro';
+import Hero from '../Hero.astro';
+import About from '../About.astro';
+import ToucherConscient from '../ToucherConscient.astro';
+import Formules from '../Formules.astro';
+import Soins from '../Soins.astro';
+import Jeune from '../Jeune.astro';
+import Retraites from '../Retraites.astro';
+import Avis from '../Avis.astro';
+import Contact from '../Contact.astro';
+import Footer from '../Footer.astro';
+import { heroImages, HERO_MOBILE_MAX } from '../../data/images';
+---
+
+<Layout page="home">
+  <Fragment slot="head">
+    {
+      /* La photo du hero est l'élément principal affiché au chargement (LCP) :
+         on la précharge, en ne téléchargeant que la version adaptée à l'écran. */
+      heroImages && (
+        <>
+          <link rel="preload" as="image" href={heroImages.mobile} media={`(max-width: ${HERO_MOBILE_MAX}px)`} fetchpriority="high" />
+          <link rel="preload" as="image" href={heroImages.desktop} media={`(min-width: ${HERO_MOBILE_MAX + 1}px)`} fetchpriority="high" />
+        </>
+      )
+    }
+    <BusinessSchema />
+  </Fragment>
+
+  <Hero />
+  <main>
+    <About />
+    <ToucherConscient />
+    <Formules />
+    <Soins />
+    <Jeune />
+    <Retraites />
+    <Avis />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>

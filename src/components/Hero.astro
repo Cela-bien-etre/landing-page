@@ -2,6 +2,11 @@
 import '../styles/Hero.css';
 import { images, cld, heroImages } from '../data/images';
 import { site } from '../data/site';
+import { getLang, useTranslations, fill, routes } from '../i18n';
+import LangSwitch from './ui/LangSwitch.astro';
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
 
 const heroStyle = heroImages
   ? `--hero-bg: url(${heroImages.desktop}); --hero-bg-mobile: url(${heroImages.mobile})`
@@ -9,7 +14,7 @@ const heroStyle = heroImages
 ---
 
 <header id="hero" style={heroStyle}>
-  <a href="/" class="hero-logo">
+  <a href={routes.home[lang]} class="hero-logo">
     {
       images.logo ? (
         <img src={cld(images.logo, 400)} alt={site.name} loading="eager" />
@@ -21,21 +26,23 @@ const heroStyle = heroImages
     }
   </a>
 
+  <LangSwitch page="home" tone="light" class="hero-lang" />
+
   <div class="hero-content">
     {images.ornement && <img src={cld(images.ornement, 140)} alt="" aria-hidden="true" class="hero-ornement" />}
-    <h1>Massages à domicile <span class="hero-lieu">à {site.city} & alentours</span></h1>
-    <p class="hero-soins">Personnalisé - Deep tissue - Sportif - Réflexologie plantaire - Kobido - Reiki</p>
+    <h1>{t.hero.title} <span class="hero-lieu">{fill(t.hero.location, { city: site.city })}</span></h1>
+    <p class="hero-soins">{t.hero.soins}</p>
     <span class="hero-separator" aria-hidden="true"></span>
     <blockquote>
-      <p>« La meilleure façon de se reconnecter à Soi est de toucher le corps avec l'intention de l'écouter avec le cœur. »</p>
+      <p>{t.hero.quote}</p>
       <cite>{site.owner}</cite>
     </blockquote>
     <div class="hero-actions">
-      <a href="#contact" class="button button--light" lang="en">Let's connect</a>
+      <a href="#contact" class="button button--light">{t.hero.contact}</a>
       {
         site.planityUrl && (
           <a href={site.planityUrl} class="button" target="_blank" rel="noopener noreferrer">
-            Réserver sur Planity<span class="sr-only"> (nouvel onglet)</span>
+            {t.common.bookPlanity}<span class="sr-only">{t.common.newTab}</span>
           </a>
         )
       }

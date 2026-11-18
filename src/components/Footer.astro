@@ -1,11 +1,15 @@
 ---
 import '../styles/Footer.css';
 import { site } from '../data/site';
+import { getLang, useTranslations, routes } from '../i18n';
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
 ---
 
 <footer class="footer">
   <div class="container footer-content">
-    <p>&copy; {new Date().getFullYear()} {site.name}. Tous droits réservés.</p>
-    <a href="/mentions-legales">Mentions légales</a>
+    <p>&copy; {new Date().getFullYear()} {site.name}. {t.footer.rights}</p>
+    <a href={routes.legal[lang]}>{t.footer.legal}</a>
   </div>
 </footer>

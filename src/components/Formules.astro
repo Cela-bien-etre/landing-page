@@ -1,20 +1,23 @@
 ---
 import '../styles/Formules.css';
 import { images } from '../data/images';
+import { getLang, useTranslations } from '../i18n';
 import Photo from './ui/Photo.astro';
 import Ornement from './ui/Ornement.astro';
 
+const t = useTranslations(getLang(Astro.currentLocale));
+
 const formules = [
-  { href: '#soins', image: images.formuleDomicile, label: 'À votre domicile, dans votre cocon de douceur' },
-  { href: '#jeune', image: images.formuleJeune, label: "Dans le cadre d'un séjour de Jeûne & Randonnée" },
-  { href: '#retraites', image: images.formuleYoga, label: "Lors d'une retraite de Yoga & Méditation" },
+  { href: '#soins', image: images.formuleDomicile, label: t.formules.domicile },
+  { href: '#jeune', image: images.formuleJeune, label: t.formules.jeune },
+  { href: '#retraites', image: images.formuleYoga, label: t.formules.yoga },
 ];
 ---
 
 <section id="formules" class="section">
   <Ornement />
   <div class="container">
-    <h2 class="section-title">Vous pouvez faire appel à moi :</h2>
+    <h2 class="section-title">{t.formules.title}</h2>
     <div class="formules-grid">
       {
         formules.map((f) => (

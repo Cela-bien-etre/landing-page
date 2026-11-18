@@ -2,9 +2,12 @@
 import '../styles/Soins.css';
 import { images } from '../data/images';
 import { soins } from '../data/soins';
+import { site } from '../data/site';
+import { getLang, useTranslations, fill } from '../i18n';
 import Photo from './ui/Photo.astro';
 import Ornement from './ui/Ornement.astro';
-import { site } from '../data/site';
+
+const t = useTranslations(getLang(Astro.currentLocale));
 
 // Les soins sont présentés par blocs de 2, avec l'image alternativement à gauche / à droite
 const blocImages = [images.soins1, images.soins2, images.soins3];
@@ -15,30 +18,33 @@ const blocs = blocImages.map((image, i) => ({ image, soins: soins.slice(i * 2, i
   <Ornement />
   <div class="container">
     <h2 class="section-title section-title--center">
-      Les soins à domicile :<br />
-      <span class="soins-subtitle">chaque massage est adapté en fonction de vos besoins du moment</span>
+      {t.soins.title}<br />
+      <span class="soins-subtitle">{t.soins.subtitle}</span>
     </h2>
 
     {
       blocs.map((bloc, i) => (
         <div class:list={['soins-bloc', { 'soins-bloc--reverse': i % 2 === 1 }]}>
           <div class="soins-photo">
-            <Photo src={bloc.image} alt="Massage à domicile" width={600} />
+            <Photo src={bloc.image} alt={t.soins.photoAlt} width={600} />
           </div>
           <ul class="soins-list">
-            {bloc.soins.map((soin) => (
-              <li class="soin">
-                <h3 class="soin-nom">{soin.nom}</h3>
-                <p class="soin-description">{soin.description}</p>
-                <ul class="soin-tarifs" aria-label={`Tarifs ${soin.nom}`}>
-                  {soin.tarifs.map((t) => (
-                    <li>
-                      {t.duree} - {t.prix}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
+            {bloc.soins.map((soin) => {
+              const texte = t.soins.items[soin.id];
+              return (
+                <li class="soin">
+                  <h3 class="soin-nom">{texte.nom}</h3>
+                  <p class="soin-description">{texte.description}</p>
+                  <ul class="soin-tarifs" aria-label={fill(t.soins.tarifsLabel, { soin: texte.nom })}>
+                    {soin.tarifs.map((tarif) => (
+                      <li>
+                        {tarif.duree} - {tarif.prix}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              );
+            })}
           </ul>
         </div>
       ))
@@ -48,7 +54,7 @@ const blocs = blocImages.map((image, i) => ({ image, soins: soins.slice(i * 2, i
       site.planityUrl && (
         <div class="soins-actions">
           <a href={site.planityUrl} class="button" target="_blank" rel="noopener noreferrer">
-            Réserver sur Planity<span class="sr-only"> (nouvel onglet)</span>
+            {t.common.bookPlanity}<span class="sr-only">{t.common.newTab}</span>
           </a>
         </div>
       )
