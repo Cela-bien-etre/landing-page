@@ -1,6 +1,7 @@
 ---
 import '../styles/Footer.css';
 import { site } from '../data/site';
+import SocialLinks from './ui/SocialLinks.astro';
 import { getLang, useTranslations, routes } from '../i18n';
 
 const lang = getLang(Astro.currentLocale);
@@ -10,6 +11,9 @@ const t = useTranslations(lang);
 <footer class="footer">
   <div class="container footer-content">
     <p>&copy; {new Date().getFullYear()} {site.name}. {t.footer.rights}</p>
-    <a href={routes.legal[lang]}>{t.footer.legal}</a>
+    <div class="footer-links">
+      <SocialLinks />
+      <a href={routes.legal[lang]}>{t.footer.legal}</a>
+    </div>
   </div>
 </footer>

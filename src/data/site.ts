@@ -30,8 +30,9 @@ export const site = {
   ],
 
   email: "", // TODO
-  phone: "", // TODO (format international conseillé : +33 6 12 34 56 78)
-  instagram: "", // TODO : URL complète du profil
+  phone: "+33 7 67 49 47 36", // format international (affiché « 07 … » sur la version française)
+  instagram: "https://www.instagram.com/cela__bien_etre/",
+  facebook: "https://www.facebook.com/share/19vXBrigdV/",
   // Lien de partage de la fiche Google (Google Business Profile)
   googleBusinessUrl: "https://maps.app.goo.gl/du14ZRGC7cBLkR3X9",
   planityUrl: "https://www.planity.com/cela-bien-etre-40140-soustons", // TODO : lien de la page Planity de Céline

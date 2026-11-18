@@ -26,11 +26,11 @@ export const images = {
 
   // 5. Les soins à domicile (une image par bloc de 2 soins)
   soins1:
-    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541846/Copy_of_Event.jpg",
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794999754/DSC_0055.jpg",
   soins2:
-    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541846/Copy_of_Event.jpg",
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794997435/Untitled_design_48.png",
   soins3:
-    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1793541846/Copy_of_Event.jpg",
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794997434/Untitled_design_75.png",
 
   // 6. Séjours de jeûne : les 3 collages
   jeune1:
@@ -51,7 +51,7 @@ export const images = {
 
   // 7. Le soin Régénérant
   soinRegenerant:
-    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1794945440/Hello_Site_internet_5.png",
+    "https://res.cloudinary.com/mlx0vnmw/image/upload/v1795001107/Untitled_Design.png",
 
   // 8. Retraites de yoga
   retraiteYoga:

@@ -20,3 +20,14 @@
 .footer a:hover {
   text-decoration-thickness: 2px;
 }
+
+.footer-content {
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+

@@ -34,3 +34,8 @@
     min-height: 420px;
   }
 }
+
+.about-social {
+  margin-top: 2rem;
+  color: var(--color-text);
+}

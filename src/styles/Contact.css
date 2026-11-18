@@ -266,3 +266,26 @@
     padding: 1.25rem;
   }
 }
+
+.contact-direct {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+
+.contact-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: inherit;
+  font-size: 1.15rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.contact-phone:hover,
+.contact-phone:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

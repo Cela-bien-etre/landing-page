@@ -3,6 +3,7 @@ import '../styles/About.css';
 import { images } from '../data/images';
 import { getLang, useTranslations } from '../i18n';
 import Photo from './ui/Photo.astro';
+import SocialLinks from './ui/SocialLinks.astro';
 
 const t = useTranslations(getLang(Astro.currentLocale));
 ---
@@ -11,6 +12,7 @@ const t = useTranslations(getLang(Astro.currentLocale));
   <div class="about-text">
     <h2 class="section-title">{t.about.title}</h2>
     {t.about.paragraphs.map((p) => <p>{p}</p>)}
+    <SocialLinks class="about-social" />
   </div>
   <div class="about-photo">
     <Photo src={images.portrait} alt={t.about.photoAlt} width={900} />

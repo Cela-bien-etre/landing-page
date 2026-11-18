@@ -17,7 +17,7 @@ const businessId = `${new URL('/', Astro.site).href}#business`;
 const prix = (p: string) => p.replace(/[^\d.,]/g, '').replace(',', '.');
 const tousLesPrix = soins.flatMap((s) => s.tarifs.map((tarif) => Number(prix(tarif.prix))));
 // Autres pages officielles de l'activité : aident Google à relier le site, la fiche Google et les profils
-const sameAs = [site.googleBusinessUrl, site.instagram, site.planityUrl].filter(Boolean);
+const sameAs = [site.googleBusinessUrl, site.instagram, site.facebook, site.planityUrl].filter(Boolean);
 
 const schema = {
   '@context': 'https://schema.org',

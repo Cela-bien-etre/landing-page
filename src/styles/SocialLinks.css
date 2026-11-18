@@ -1,0 +1,25 @@
+.social-links {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-radius: 50%;
+  color: inherit;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.social-links a:hover,
+.social-links a:focus-visible {
+  border-color: currentColor;
+  background-color: color-mix(in srgb, currentColor 12%, transparent);
+}
